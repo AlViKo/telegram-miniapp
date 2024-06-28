@@ -17,7 +17,7 @@
             background-attachment: fixed;
         }
         .glass {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(5px);
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -28,7 +28,6 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // Your existing React code here (unchanged)
         const { useState, useEffect } = React;
 
         const channels = {
@@ -58,11 +57,11 @@
 
             const renderChannels = (category) => {
                 return channels[category].map((channel, index) => (
-                    <div key={index} className="flex items-center p-4 mb-2 glass cursor-pointer hover:bg-white hover:bg-opacity-30 transition-all duration-300" onClick={() => handleChannelClick(channel.url)}>
+                    <div key={index} className="flex items-center p-4 mb-2 glass cursor-pointer hover:bg-gray-700 transition-all duration-300" onClick={() => handleChannelClick(channel.url)}>
                         <img src={channel.avatar} alt={channel.name} className="w-12 h-12 rounded-full mr-4" />
                         <div>
-                            <h3 className="font-bold text-lg">{channel.name}</h3>
-                            <p className="text-sm text-gray-200">{channel.description}</p>
+                            <h3 className="font-bold text-lg text-white">{channel.name}</h3>
+                            <p className="text-sm text-gray-300">{channel.description}</p>
                         </div>
                     </div>
                 ));
@@ -70,17 +69,17 @@
 
             return (
                 <div className="container mx-auto p-4">
-                    <h1 className="text-4xl font-bold mb-6 text-center">Aviation in Telegram</h1>
+                    <h1 className="text-4xl font-bold mb-6 text-center text-white shadow-text">Aviation in Telegram</h1>
                     
                     <div className="flex justify-center mb-6">
                         <button 
-                            className={`mr-4 px-6 py-2 rounded-full font-bold transition-all duration-300 ${activeTab === 'catalogue' ? 'bg-blue-500 text-white shadow-lg' : 'bg-white bg-opacity-20 hover:bg-opacity-30'}`}
+                            className={`mr-4 px-6 py-2 rounded-full font-bold transition-all duration-300 ${activeTab === 'catalogue' ? 'bg-blue-600 text-white shadow-lg' : 'bg-gray-800 text-white hover:bg-gray-700'}`}
                             onClick={() => setActiveTab('catalogue')}
                         >
                             Каталог
                         </button>
                         <button 
-                            className={`px-6 py-2 rounded-full font-bold transition-all duration-300 ${activeTab === 'contact' ? 'bg-blue-500 text-white shadow-lg' : 'bg-white bg-opacity-20 hover:bg-opacity-30'}`}
+                            className={`px-6 py-2 rounded-full font-bold transition-all duration-300 ${activeTab === 'contact' ? 'bg-blue-600 text-white shadow-lg' : 'bg-gray-800 text-white hover:bg-gray-700'}`}
                             onClick={() => setActiveTab('contact')}
                         >
                             Связаться с владельцем приложения
@@ -91,7 +90,7 @@
                         <div className="glass p-4">
                             <div className="mb-4">
                                 <button 
-                                    className="w-full text-left p-3 bg-white bg-opacity-20 rounded-lg font-bold hover:bg-opacity-30 transition-all duration-300"
+                                    className="w-full text-left p-3 bg-gray-800 rounded-lg font-bold hover:bg-gray-700 transition-all duration-300 text-white"
                                     onClick={() => setExpandedCategory(expandedCategory === 'civil' ? null : 'civil')}
                                 >
                                     Гражданская авиация {expandedCategory === 'civil' ? '▲' : '▼'}
@@ -100,7 +99,7 @@
                             </div>
                             <div>
                                 <button 
-                                    className="w-full text-left p-2 bg-gray-100 rounded"
+                                    className="w-full text-left p-3 bg-gray-800 rounded-lg font-bold hover:bg-gray-700 transition-all duration-300 text-white"
                                     onClick={() => setExpandedCategory(expandedCategory === 'military' ? null : 'military')}
                                 >
                                     Военная авиация {expandedCategory === 'military' ? '▲' : '▼'}
@@ -112,8 +111,8 @@
 
                     {activeTab === 'contact' && (
                         <div className="glass p-6">
-                            <p className="mb-4">To contact the administrators, please use the following email address:</p>
-                            <p className="font-bold text-xl">admin@aviationintelegram.com</p>
+                            <p className="mb-4 text-white">To contact the administrators, please use the following email address:</p>
+                            <p className="font-bold text-xl text-white">admin@aviationintelegram.com</p>
                         </div>
                     )}
                 </div>
