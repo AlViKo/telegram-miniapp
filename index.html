@@ -31,21 +31,71 @@
         const { useState, useEffect } = React;
 
         const channels = {
-            civil: [
-                { name: "FlightMode", username: "aviationmode", description: "Мы собираем для вас самые актуальные и интересные новости и факты. Авиация для нас - не только профессия, но и любимое дело!" },
-                { name: "FrequentFlyers", username: "frequentflyers", description: "Канал для продвинутых авиапассажиров и тех, кто хочет ими стать." },
-                { name: "AviaComments", username: "AviaComments", description: "Комментарии и интересные ссылки по авиации: анализируем авиановости, читаем пресс-релизы авиапроизводителей между строк и следим за сложной судьбой отечественного авиастроения." },
-                { name: "Скромный Работник Гражданской Авиации", username: "heliman86", description: "Вертолётчик. Облетал почти всю Россию. На этом канале я рассказываю про свою работу." },
-                { name: "Работа в авиации", username: "aviahh", description: "Публикую авиационные и околоавиационные вакансии и резюме." },
-                { name: "ОтВинта | Авиация Беларуси", username: "otvinta_by", description: "Авторский взгляд на гражданскую и военную авиацию Беларуси." }
-            ],
-            military: [
-                { name: "Wings of War", username: "wingsofwar", description: "Канал о боевой авиации и военных летчиках, о воздушных боях и о применении военной авиации в боевых операциях." },
-                { name: "Вертолатте", username: "vertolatte", description: "Канал для всех любителей винтокрылых." },
-                { name: "Обозреватель БПЛА", username: "dronesrussia", description: "Агрегатор новостей и постов о дронах на русском языке." },
-                { name: "Helincidents", username: "helincidents", description: "Вертолёты.  Проишествия. Интересные события." }
-            ]
-        };
+    civil: [
+        { 
+            name: "FlightMode", 
+            username: "aviationmode", 
+            description: "Мы собираем для вас самые актуальные и интересные новости и факты. Авиация для нас - не только профессия, но и любимое дело!",
+            avatar: "/avatars/FlightMode.jpg"
+        },
+        { 
+            name: "FrequentFlyers", 
+            username: "frequentflyers", 
+            description: "Канал для продвинутых авиапассажиров и тех, кто хочет ими стать.",
+            avatar: "/avatars/Frequest Flyers.jpg"
+        },
+        { 
+            name: "AviaComments", 
+            username: "AviaComments", 
+            description: "Комментарии и интересные ссылки по авиации: анализируем авиановости, читаем пресс-релизы авиапроизводителей между строк и следим за сложной судьбой отечественного авиастроения.",
+            avatar: "/avatars/avia comments.jpg"
+        },
+        { 
+            name: "Скромный Работник Гражданской Авиации", 
+            username: "heliman86", 
+            description: "Вертолётчик. Облетал почти всю Россию. На этом канале я рассказываю про свою работу.",
+            avatar: "/avatars/Скромный Работник Гражданской Авиации.jpg"
+        },
+        { 
+            name: "Работа в авиации", 
+            username: "aviahh", 
+            description: "Публикую авиационные и околоавиационные вакансии и резюме.",
+            avatar: "/avatars/Работа в авиации.jpg"
+        },
+        { 
+            name: "ОтВинта | Авиация Беларуси", 
+            username: "otvinta_by", 
+            description: "Авторский взгляд на гражданскую и военную авиацию Беларуси.", 
+            avatar: "/avatars/От Винта.jpg"
+        }
+    ],
+    military: [
+        { 
+            name: "Wings of War", 
+            username: "wingsofwar", 
+            description: "Канал о боевой авиации и военных летчиках, о воздушных боях и о применении военной авиации в боевых операциях.",
+            avatar: "/avatars/Wings of war.jpg"
+        },
+        { 
+            name: "Вертолатте", 
+            username: "vertolatte", 
+            description: "Канал для всех любителей винтокрылых.",
+            avatar: "/avatars/verolatte.jpg"
+        },
+        { 
+            name: "Обозреватель БПЛА", 
+            username: "dronesrussia", 
+            description: "Агрегатор новостей и постов о дронах на русском языке.",
+            avatar: "/avatars/обозреватель БПЛА.jpg"
+        },
+        { 
+            name: "Helincidents", 
+            username: "helincidents", 
+            description: "Вертолёты.  Проишествия. Интересные события.",
+            avatar: "/avatars/Heliincidents.jpg"
+        }
+    ]
+};
 
         function App() {
             const [activeTab, setActiveTab] = useState('catalogue');
