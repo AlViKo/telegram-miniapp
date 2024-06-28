@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="img-src 'self' data: https: http:;">
     <title>Aviation in Telegram</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
@@ -36,37 +37,37 @@
             name: "FlightMode", 
             username: "aviationmode", 
             description: "Мы собираем для вас самые актуальные и интересные новости и факты. Авиация для нас - не только профессия, но и любимое дело!",
-            avatar: "telegram-miniapp/avatars/FlightMode.jpg"
+            avatar: "./avatars/FlightMode.jpg"
         },
         { 
             name: "FrequentFlyers", 
             username: "frequentflyers", 
             description: "Канал для продвинутых авиапассажиров и тех, кто хочет ими стать.",
-            avatar: "telegram-miniapp/avatars/Frequest Flyers.jpg"
+            avatar: "./avatars/Frequest Flyers.jpg"
         },
         { 
             name: "AviaComments", 
             username: "AviaComments", 
             description: "Комментарии и интересные ссылки по авиации: анализируем авиановости, читаем пресс-релизы авиапроизводителей между строк и следим за сложной судьбой отечественного авиастроения.",
-            avatar: "telegram-miniapp/avatars/avia comments.jpg"
+            avatar: "./avatars/avia comments.jpg"
         },
         { 
             name: "Скромный Работник Гражданской Авиации", 
             username: "heliman86", 
             description: "Вертолётчик. Облетал почти всю Россию. На этом канале я рассказываю про свою работу.",
-            avatar: "telegram-miniapp/avatars/Скромный Работник Гражданской Авиации.jpg"
+            avatar: "./avatars/Скромный Работник Гражданской Авиации.jpg"
         },
         { 
             name: "Работа в авиации", 
             username: "aviahh", 
             description: "Публикую авиационные и околоавиационные вакансии и резюме.",
-            avatar: "telegram-miniapp/avatars/Работа в авиации.jpg"
+            avatar: "./avatars/Работа в авиации.jpg"
         },
         { 
             name: "ОтВинта | Авиация Беларуси", 
             username: "otvinta_by", 
             description: "Авторский взгляд на гражданскую и военную авиацию Беларуси.", 
-            avatar: "telegram-miniapp/avatars/От Винта.jpg"
+            avatar: "./avatars/От Винта.jpg"
         }
     ],
     military: [
@@ -74,25 +75,25 @@
             name: "Wings of War", 
             username: "wingsofwar", 
             description: "Канал о боевой авиации и военных летчиках, о воздушных боях и о применении военной авиации в боевых операциях.",
-            avatar: "telegram-miniapp/avatars/Wings of war.jpg"
+            avatar: "./avatars/Wings of war.jpg"
         },
         { 
             name: "Вертолатте", 
             username: "vertolatte", 
             description: "Канал для всех любителей винтокрылых.",
-            avatar: "telegram-miniapp/avatars/verolatte.jpg"
+            avatar: "./avatars/verolatte.jpg"
         },
         { 
             name: "Обозреватель БПЛА", 
             username: "dronesrussia", 
             description: "Агрегатор новостей и постов о дронах на русском языке.",
-            avatar: "telegram-miniapp/avatars/обозреватель БПЛА.jpg"
+            avatar: "./avatars/обозреватель БПЛА.jpg"
         },
         { 
             name: "Helincidents", 
             username: "helincidents", 
             description: "Вертолёты.  Проишествия. Интересные события.",
-            avatar: "telegram-miniapp/avatars/Heliincidents.jpg"
+            avatar: "./avatars/Heliincidents.jpg"
         }
     ]
 };
@@ -116,8 +117,14 @@
             <img 
                 src={channel.avatar} 
                 alt={channel.name} 
-                className="w-12 h-12 rounded-full mr-4" 
-                onError={(e) => {e.target.onerror = null; e.target.src="./avatars/default.jpg"}} 
+                className="w-12 h-12 min-w-[48px] min-h-[48px] rounded-full mr-4" 
+                style={{border: '1px solid white'}}
+                onError={(e) => {
+                    console.error('Error loading image:', e.target.src);
+                    e.target.onerror = null; 
+                    e.target.src="./avatars/default.jpg";
+                }}
+                onLoad={(e) => console.log('Image loaded successfully:', e.target.src)}
             />
             <div>
                 <h3 className="font-bold text-lg text-white">{channel.name}</h3>
