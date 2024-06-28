@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviation in Telegram</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const channels = {
+            civil: [
+                { name: "Aviation Mode", url: "https://t.me/aviationmode", avatar: "/api/placeholder/50/50", description: "Latest news and updates from the world of civil aviation." },
+                { name: "Frequent Flyers", url: "https://t.me/frequentflyers", avatar: "/api/placeholder/50/50", description: "Community for aviation enthusiasts and frequent travelers." },
+                { name: "Avia Comments", url: "https://t.me/AviaComments", avatar: "/api/placeholder/50/50", description: "Discussion and commentary on aviation-related topics." }
+            ],
+            military: [
+                { name: "Wings of War", url: "https://t.me/wingsofwar", avatar: "/api/placeholder/50/50", description: "Updates and information about military aircraft and operations." },
+                { name: "Vertolatte", url: "https://t.me/vertolatte", avatar: "/api/placeholder/50/50", description: "Focused on military helicopters and vertical lift aircraft." }
+            ]
+        };
+
+        function App() {
+            const [activeTab, setActiveTab] = useState('catalogue');
+            const [expandedCategory, setExpandedCategory] = useState(null);
+
+            useEffect(() => {
+                Telegram.WebApp.ready();
+                Telegram.WebApp.MainButton.hide();
+            }, []);
+
+            const handleChannelClick = (url) => {
+                Telegram.WebApp.openTelegramLink(url);
+            };
+
+            const renderChannels = (category) => {
+                return channels[category].map((channel, index) => (
+                    <div key={index} className="flex items-center p-2 border-b" onClick={() => handleChannelClick(channel.url)}>
+                        <img src={channel.avatar} alt={channel.name} className="w-12 h-12 rounded-full mr-4" />
+                        <div>
+                            <h3 className="font-bold">{channel.name}</h3>
+                            <p className="text-sm text-gray-600">{channel.description}</p>
+                        </div>
+                    </div>
+                ));
+            };
+
+            return (
+                <div className="container mx-auto p-4">
+                    <h1 className="text-2xl font-bold mb-4">Aviation in Telegram</h1>
+                    
+                    <div className="flex mb-4">
+                        <button 
+                            className={`mr-2 px-4 py-2 rounded ${activeTab === 'catalogue' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                            onClick={() => setActiveTab('catalogue')}
+                        >
+                            Catalogue
+                        </button>
+                        <button 
+                            className={`px-4 py-2 rounded ${activeTab === 'contact' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                            onClick={() => setActiveTab('contact')}
+                        >
+                            Contact Administrators
+                        </button>
+                    </div>
+
+                    {activeTab === 'catalogue' && (
+                        <div>
+                            <div className="mb-4">
+                                <button 
+                                    className="w-full text-left p-2 bg-gray-100 rounded"
+                                    onClick={() => setExpandedCategory(expandedCategory === 'civil' ? null : 'civil')}
+                                >
+                                    Civil Aviation {expandedCategory === 'civil' ? '▲' : '▼'}
+                                </button>
+                                {expandedCategory === 'civil' && renderChannels('civil')}
+                            </div>
+                            <div>
+                                <button 
+                                    className="w-full text-left p-2 bg-gray-100 rounded"
+                                    onClick={() => setExpandedCategory(expandedCategory === 'military' ? null : 'military')}
+                                >
+                                    Military Aviation {expandedCategory === 'military' ? '▲' : '▼'}
+                                </button>
+                                {expandedCategory === 'military' && renderChannels('military')}
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'contact' && (
+                        <div>
+                            <p>To contact the administrators, please use the following email address:</p>
+                            <p className="font-bold mt-2">admin@aviationintelegram.com</p>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
