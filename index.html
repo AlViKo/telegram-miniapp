@@ -32,13 +32,18 @@
 
         const channels = {
             civil: [
-                { name: "FlightMode", url: "https://t.me/aviationmode", avatar: "/api/placeholder/50/50", description: "Мы собираем для вас самые актуальные и интересные новости и факты. Авиация для нас - не только профессия, но и любимое дело!" },
-                { name: "FrequentFlyers", url: "https://t.me/frequentflyers", avatar: "/api/placeholder/50/50", description: "Канал для продвинутых авиапассажиров и тех, кто хочет ими стать." },
-                { name: "AviaComments", url: "https://t.me/AviaComments", avatar: "/api/placeholder/50/50", description: "Комментарии и интересные ссылки по авиации: анализируем авиановости, читаем пресс-релизы авиапроизводителей между строк и следим за сложной судьбой отечественного авиастроения." }
+                { name: "FlightMode", username: "aviationmode", description: "Мы собираем для вас самые актуальные и интересные новости и факты. Авиация для нас - не только профессия, но и любимое дело!" },
+                { name: "FrequentFlyers", username: "frequentflyers", description: "Канал для продвинутых авиапассажиров и тех, кто хочет ими стать." },
+                { name: "AviaComments", username: "AviaComments", description: "Комментарии и интересные ссылки по авиации: анализируем авиановости, читаем пресс-релизы авиапроизводителей между строк и следим за сложной судьбой отечественного авиастроения." },
+                { name: "Скромный Работник Гражданской Авиации", username: "heliman86", description: "Вертолётчик. Облетал почти всю Россию. На этом канале я рассказываю про свою работу." },
+                { name: "Работа в авиации", username: "aviahh", description: "Публикую авиационные и околоавиационные вакансии и резюме." },
+                { name: "ОтВинта | Авиация Беларуси", username: "otvinta_by", description: "Авторский взгляд на гражданскую и военную авиацию Беларуси." }
             ],
             military: [
-                { name: "Wings of War", url: "https://t.me/wingsofwar", avatar: "/api/placeholder/50/50", description: "Канал о боевой авиации и военных летчиках, о воздушных боях и о применении военной авиации в боевых операциях." },
-                { name: "Вертолатте", url: "https://t.me/vertolatte", avatar: "/api/placeholder/50/50", description: "Канал для всех любителей винтокрылых." }
+                { name: "Wings of War", username: "wingsofwar", description: "Канал о боевой авиации и военных летчиках, о воздушных боях и о применении военной авиации в боевых операциях." },
+                { name: "Вертолатте", username: "vertolatte", description: "Канал для всех любителей винтокрылых." },
+                { name: "Обозреватель БПЛА", username: "dronesrussia", description: "Агрегатор новостей и постов о дронах на русском языке." },
+                { name: "Helincidents", username: "helincidents", description: "Вертолёты.  Проишествия. Интересные события." }
             ]
         };
 
@@ -51,14 +56,14 @@
                 Telegram.WebApp.MainButton.hide();
             }, []);
 
-            const handleChannelClick = (url) => {
-                Telegram.WebApp.openTelegramLink(url);
+            const handleChannelClick = (username) => {
+                Telegram.WebApp.openTelegramLink(`https://t.me/${username}`);
             };
 
             const renderChannels = (category) => {
                 return channels[category].map((channel, index) => (
-                    <div key={index} className="flex items-center p-4 mb-2 glass cursor-pointer hover:bg-gray-700 transition-all duration-300" onClick={() => handleChannelClick(channel.url)}>
-                        <img src={channel.avatar} alt={channel.name} className="w-12 h-12 rounded-full mr-4" />
+                    <div key={index} className="flex items-center p-4 mb-2 glass cursor-pointer hover:bg-gray-700 transition-all duration-300" onClick={() => handleChannelClick(channel.username)}>
+                        <img src={`https://t.me/${channel.username}/profile?r=${Date.now()}`} alt={channel.name} className="w-12 h-12 rounded-full mr-4" onError={(e) => {e.target.onerror = null; e.target.src="https://via.placeholder.com/50?text=No+Image"}} />
                         <div>
                             <h3 className="font-bold text-lg text-white">{channel.name}</h3>
                             <p className="text-sm text-gray-300">{channel.description}</p>
@@ -69,7 +74,7 @@
 
             return (
                 <div className="container mx-auto p-4">
-                    <h1 className="text-4xl font-bold mb-6 text-center text-white shadow-text">Авиация в Telegram</h1>
+                    <h1 className="text-4xl font-bold mb-6 text-center text-white shadow-text">Авиация Telegram</h1>
                     
                     <div className="flex justify-center mb-6">
                         <button 
